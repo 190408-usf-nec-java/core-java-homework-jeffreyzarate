@@ -230,7 +230,7 @@ public class EvaluationService {
 				cleanNumber.append(character);
 			}
 		}
-		if(cleanNumber.length()!=10)
+		if(cleanNumber.length()!=10 && cleanNumber.length()!=11)
 		{
 			throw new IllegalArgumentException();
 		}
