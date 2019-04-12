@@ -655,7 +655,6 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
 			char[] alphabet = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 			List<Character> alphabetList = new ArrayList<Character>();
 			StringBuilder cipher = new StringBuilder();
