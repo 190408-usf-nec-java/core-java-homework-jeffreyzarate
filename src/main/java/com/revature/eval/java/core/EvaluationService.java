@@ -355,10 +355,6 @@ public class EvaluationService {
 						subList = subList.subList(mid, subList.size());
 
 					}
-					if(subList.size()==1 && found==false)
-					{
-						System.out.println("not found");
-					}
 				}
 				catch(Exception e)
 				{
@@ -380,10 +376,6 @@ public class EvaluationService {
 						adjust+=mid;
 						subList = subList.subList(mid, subList.size());
 
-					}
-					if(subList.size()==1 && found==false)
-					{
-						System.out.println("not found");
 					}
 				}
 			}
@@ -574,7 +566,6 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 
-			String convertedString = string.toLowerCase();
 			char[] alphabet = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 			List<Character> alphabetList = new LinkedList<Character>();
 			List<Character> rotatedCharacters = new LinkedList<Character>();
