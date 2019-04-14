@@ -314,37 +314,82 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			String compare = t.toString();
-			int comparator = (compare.compareTo(this.sortedList.get((sortedList.size()/2)).toString()));
+
+			
+			boolean found = false;
 			int index=0;
-			if(comparator ==0)
+			int adjust=0;
+			List<T> subList = this.sortedList;
+			while(found == false && subList.size()>1)
 			{
-					index =sortedList.size()/2;
-				
-			}
-			if(comparator>0)
-			{
-				for(int i=0; i<(sortedList.size()/2); i++)
-				{
-					if(compare.compareTo(this.sortedList.get(i).toString())==0)
+				int mid = subList.size()/2;
+				try {
+					int compare = Integer.parseInt(t.toString());
+					int comparing = Integer.parseInt(subList.get(mid).toString());
+					int comparator=0;
+					if(compare>comparing)
 					{
-						index =i;
-					}	
+						comparator =  -1;
+					}
+					else if(compare<comparing)
+					{
+						comparator =1;
+					}
+					else
+					{
+						comparator=0;
+					}
+					
+					if(comparator ==0)
+					{
+							index =mid+adjust;
+							break;	
+					}
+					if(comparator>0)
+					{
+						subList = subList.subList(0, mid);
+					}
+					if(comparator<0)
+					{
+						adjust+=mid;
+						subList = subList.subList(mid, subList.size());
+
+					}
+					if(subList.size()==1 && found==false)
+					{
+						System.out.println("not found");
+					}
+				}
+				catch(Exception e)
+				{
+					String compare = t.toString();
+					String comparing = subList.get(mid).toString();
+					int comparator=compare.compareTo(comparing);
+					
+					if(comparator ==0)
+					{
+							index =mid+adjust;
+							break;	
+					}
+					if(comparator>0)
+					{
+						subList = subList.subList(0, mid);
+					}
+					if(comparator<0)
+					{
+						adjust+=mid;
+						subList = subList.subList(mid, subList.size());
+
+					}
+					if(subList.size()==1 && found==false)
+					{
+						System.out.println("not found");
+					}
 				}
 			}
-			if(comparator<0)
-			{
-				for(int i=(sortedList.size()/2)-1; i<sortedList.size(); i++)
-				{
-					if(compare.compareTo(this.sortedList.get(i).toString())==0)
-					{
-						index =i;
-					}	
-				}
-			}
-			
-			
 			return index;
+				
+				
 		}
 
 		public BinarySearch(List<T> sortedList) {
