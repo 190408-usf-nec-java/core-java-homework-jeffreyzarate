@@ -230,7 +230,11 @@ public class EvaluationService {
 				cleanNumber.append(character);
 			}
 		}
-		if(cleanNumber.length()!=10 && cleanNumber.length()!=11)
+		if(cleanNumber.length()==11 && cleanNumber.charAt(0)=='1')
+		{
+			cleanNumber.deleteCharAt(0);
+		}
+		if(cleanNumber.length()!=10)
 		{
 			throw new IllegalArgumentException();
 		}
@@ -310,7 +314,7 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
-	static class BinarySearch<T> {
+	static class BinarySearch<T extends Comparable<T>> {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
@@ -322,62 +326,25 @@ public class EvaluationService {
 			List<T> subList = this.sortedList;
 			while(found == false && subList.size()>1)
 			{
-				int mid = subList.size()/2;
-				try {
-					int compare = Integer.parseInt(t.toString());
-					int comparing = Integer.parseInt(subList.get(mid).toString());
-					int comparator=0;
-					if(compare>comparing)
-					{
-						comparator =  -1;
-					}
-					else if(compare<comparing)
-					{
-						comparator =1;
-					}
-					else
-					{
-						comparator=0;
-					}
+					int mid = subList.size()/2;
+					T compare = subList.get(mid);
+					int comparator=t.compareTo(compare);
 					
 					if(comparator ==0)
 					{
 							index =mid+adjust;
 							break;	
 					}
-					if(comparator>0)
+					if(comparator<0)
 					{
 						subList = subList.subList(0, mid);
 					}
-					if(comparator<0)
+					if(comparator>0)
 					{
 						adjust+=mid;
 						subList = subList.subList(mid, subList.size());
 
 					}
-				}
-				catch(Exception e)
-				{
-					String compare = t.toString();
-					String comparing = subList.get(mid).toString();
-					int comparator=compare.compareTo(comparing);
-					
-					if(comparator ==0)
-					{
-							index =mid+adjust;
-							break;	
-					}
-					if(comparator>0)
-					{
-						subList = subList.subList(0, mid);
-					}
-					if(comparator<0)
-					{
-						adjust+=mid;
-						subList = subList.subList(mid, subList.size());
-
-					}
-				}
 			}
 			return index;
 				
@@ -859,8 +826,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		boolean isDateTime = true;
+
 		try {
 			LocalDateTime date = LocalDateTime.parse(given.toString());
 			return date.plusSeconds(1000000000l);
